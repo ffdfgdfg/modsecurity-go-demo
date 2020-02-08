@@ -142,8 +142,7 @@ func (ccHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	if ret < 1 {
 		log.Fatalf("Error processing conection: %d", int(ret))
 	}
-
-	C.msc_process_uri(transaction, C.CString(req.URL.RawPath), C.CString(req.Method), C.CString(req.Proto[5:]))
+	C.msc_process_uri(transaction, C.CString(req.URL.Path), C.CString(req.Method), C.CString(req.Proto[5:]))
 	// msr->t, r->unparsed_uri, r->method, r->protocol + offset
 
 	for k, v := range req.Header {
